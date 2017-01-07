@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.li.view.CustomRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:visibility="gone">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFF"
+        android:padding="30dp"
+        android:layout_alignParentBottom="true"
+       >
+        <TextView
+            android:id="@+id/text_lc"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="标准品质"
+            android:onClick="myOnClick"
+            android:clickable="true"
+            android:textSize="16dp"/>
+        <TextView
+            android:id="@+id/text_bz"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="HQ品质"
+            android:onClick="myOnClick"
+            android:clickable="true"
+            android:textSize="16dp"/>
+        <TextView
+            android:id="@+id/text_hq"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="SQ高品质"
+            android:onClick="myOnClick"
+            android:clickable="true"
+            android:textSize="16dp"/>
+        <TextView
+            android:id="@+id/text_sq"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="无损品质"
+            android:onClick="myOnClick"
+            android:clickable="true"
+            android:textSize="16dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:background="#24969696"
+            android:layout_height="1px" />
+
+        <TextView
+            android:text="关闭"
+            android:onClick="myOnClick"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:id="@+id/btn_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</com.li.view.CustomRelativeLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFF"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/blend_dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="标题内容"
+        android:textColor="#FFF"
+        android:textSize="20dp"
+        android:background="@color/colorPrimary"
+        android:textStyle="normal" />
+
+    <LinearLayout
+        android:id="@+id/blend_dialog_preview"
+        android:layout_width="match_parent"
+        android:layout_height="242dip"
+        android:gravity="center"
+        android:background="@null">
+        <ImageView
+            android:id="@+id/weixin_im"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/weixin"/>
+
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/blend_dialog_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ffededed"/>
+
+    <TextView
+        android:id="@+id/blend_dialog_cancle_btn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="#696969"
+        android:textSize="16.0dip" />
+
+</LinearLayout>

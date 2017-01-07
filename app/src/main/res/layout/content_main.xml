@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_main">
+    <LinearLayout
+        android:id="@+id/liner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F1F1F1"
+        android:padding="10dp" >
+
+        <com.li.util.ClearEditText
+            android:id="@+id/filter_edit_qd"
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dip"
+            android:background="@drawable/acm_inputbox"
+            android:drawableLeft="@mipmap/search"
+            android:hint="@string/sousuo"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:textSize="15.0dip" />
+    </LinearLayout>
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/liner"
+        app:scrollbarStyle="insideOverlay"
+        app:layout_progress="@layout/view_progress"
+        app:layout_empty="@layout/view_empty"
+        />
+</RelativeLayout>

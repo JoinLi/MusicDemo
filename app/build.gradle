@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        release {
+            keyAlias 'liying'
+            keyPassword 'a19941215'
+            storeFile file('D:/androidProjects/MusicDemo/liying.jks')
+            storePassword 'a19941215'
+        }
+    }
+    compileSdkVersion 'Google Inc.:Google APIs:23'
+    buildToolsVersion "23.0.3"
+    defaultConfig {
+        applicationId "com.ly.musicdemo"
+        minSdkVersion 14
+        targetSdkVersion 22
+
+        //      以下是高斯模糊相关的API
+        renderscriptTargetApi 22
+        renderscriptSupportModeEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.0.3'
+    //noinspection GradleCompatible
+    compile 'com.android.support:cardview-v7:23.2.1'
+    compile 'com.android.support:design:23.2.1'
+    compile 'top.zibin:BottomDialog:1.0.4'
+    compile 'com.jude:easyrecyclerview:4.2.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    //高大上的图片加载框架Glide
+    compile 'jp.wasabeef:glide-transformations:2.0.1'
+    //开源的转换库glide-transformations
+    compile 'com.zhy:okhttputils:2.6.2'
+    compile 'com.bigkoo:alertview:1.0.3'
+    //开源动画库
+    compile 'com.nineoldandroids:library:2.4.0'
+    //    compile 'com.wonderkiln:blurkit:1.0.0'
+    compile project(':blurkit')
+    //友盟 sdk
+    compile 'com.umeng.analytics:analytics:latest.integration'
+}

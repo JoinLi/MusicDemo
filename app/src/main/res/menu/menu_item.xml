@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.MainActivity">
+    <item
+        android:id="@+id/lc_item"
+        android:orderInCategory="100"
+        android:title="@string/lc_smooth"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/bz_item"
+        android:orderInCategory="100"
+        android:title="@string/bz_standard"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/hq_item"
+        android:orderInCategory="100"
+        android:title="@string/hq"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/sq_item"
+        android:orderInCategory="100"
+        android:title="@string/sq"
+        app:showAsAction="never" />
+
+</menu>

@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+
+ext {
+    PUBLISH_GROUP_ID = 'com.wonderkiln'
+    PUBLISH_ARTIFACT_ID = 'blurkit'
+    PUBLISH_VERSION = '1.0.0'
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+}
+

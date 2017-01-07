@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/wy"
+        android:icon="@mipmap/sou_wangyi"
+        android:title="@string/wy" />
+    <item
+        android:id="@+id/tx"
+        android:icon="@mipmap/sou_qq"
+        android:title="@string/tx" />
+    <item
+        android:id="@+id/xm"
+        android:icon="@mipmap/sou_xiami"
+        android:title="@string/xm" />
+    <item
+        android:id="@+id/bd"
+        android:icon="@mipmap/sou_baidu"
+        android:title="@string/bd" />
+    <item
+        android:id="@+id/kg"
+        android:icon="@mipmap/sou_kugou"
+        android:title="@string/kg" />
+    <item
+        android:id="@+id/kw"
+        android:icon="@mipmap/sou_kuwo"
+        android:title="@string/kw" />
+    <item
+        android:id="@+id/sing5"
+        android:icon="@mipmap/sou_sing_icon"
+        android:title="@string/sing" />
+
+</menu>
