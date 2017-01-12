@@ -134,7 +134,7 @@ public class MainActivity_Music extends AppCompatActivity implements View.OnClic
         lyricView.setOnPlayerClickListener(this);
         lyricView.setLineSpace(PreferenceUtil.getInstance(MainActivity_Music.this).getFloat(PreferenceUtil.KEY_TEXT_SIZE, 12.0f));
         lyricView.setTextSize(PreferenceUtil.getInstance(MainActivity_Music.this).getFloat(PreferenceUtil.KEY_TEXT_SIZE, 15.0f));
-        lyricView.setHighLightTextColor(PreferenceUtil.getInstance(MainActivity_Music.this).getInt(PreferenceUtil.KEY_HIGHLIGHT_COLOR, Color.parseColor("#4FC5C7")));
+        lyricView.setHighLightTextColor(PreferenceUtil.getInstance(MainActivity_Music.this).getInt(PreferenceUtil.KEY_HIGHLIGHT_COLOR, Color.parseColor("#31C27C")));
 
         setting_layout = (ViewStub) findViewById(R.id.main_setting_layout);
         main_download_layout = (ViewStub) findViewById(R.id.main_download_layout);
@@ -309,7 +309,8 @@ public class MainActivity_Music extends AppCompatActivity implements View.OnClic
                 LogUtil.m("绝对路径" + file.getAbsolutePath());
                 LogUtil.m("相对路径" + file.getPath());
                 if (file.exists()) {
-                    lyricView.setLyricFile(file, "utf-8");
+                        lyricView.setLyricFile(file, "utf-8");
+
                 } else {
                     downloadLyric(list.get(position).getLrcUrl(), file);
                 }

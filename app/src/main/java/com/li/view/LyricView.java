@@ -44,7 +44,7 @@ public class LyricView extends View {
     private int mHintColor = Color.parseColor("#FFFFFF");  // 提示语颜色
     private int mDefaultColor = Color.parseColor("#FFFFFF");  // 默认字体颜色
     private int mIndicatorColor = Color.parseColor("#EFEFEF");  // 指示器颜色
-    private int mHighLightColor = Color.parseColor("#4FC5C7");  // 当前播放位置的颜色
+    private int mHighLightColor = Color.parseColor("#31C27C");  // 当前播放位置的颜色
     private int mCurrentShowColor = Color.parseColor("#AAAAAA");  // 当前拖动位置的颜色
 
     private int mLineCount;  // 行数
@@ -606,7 +606,11 @@ public class LyricView extends View {
                 BufferedReader reader = new BufferedReader(inputStreamReader);
                 String line = null;
                 while ((line = reader.readLine()) != null) {
-                    analyzeLyric(lyricInfo, line);
+                    try {
+                        analyzeLyric(lyricInfo, line);
+                    } catch (Exception e) {
+
+                    }
                 }
                 reader.close();
                 inputStream.close();
@@ -669,6 +673,7 @@ public class LyricView extends View {
 //                lyricInfo.song_lines.add(lineInfo);
 //            }
 //        }
+
         if (line != null && (index >= 9 || index <= 10) && line.trim().length() > 10) {
             // 歌词内容
             LineInfo lineInfo = new LineInfo();
