@@ -43,4 +43,5 @@ dependencies {
     compile project(':blurkit')
     //友盟 sdk
     compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.kyleduo.switchbutton:library:1.4.4'
 }

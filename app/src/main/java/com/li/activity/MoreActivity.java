@@ -61,8 +61,9 @@ public class MoreActivity extends AppCompatActivity {
                 startActivity(new Intent(MoreActivity.this, MessageActivity.class));
                 break;
             case R.id.more_btn_setting: //通用设置
-                Snackbar.make( v, "简单点，说话的方式简单点...", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make( v, "简单点，说话的方式简单点...", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                startActivity(new Intent(MoreActivity.this, SettingActivity.class));
                 break;
 
             default:

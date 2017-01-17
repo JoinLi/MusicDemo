@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -12,7 +13,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.text.format.Formatter;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
@@ -41,8 +41,6 @@ import com.wonderkiln.blurkit.BlurLayout;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -81,12 +79,19 @@ public class MainActivity_Music extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_main_music);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setTranslucentStatus();
+            SharedPreferences share = getSharedPreferences("Data", MODE_PRIVATE);
+            if (share.getBoolean("isChecked", false)) {
+                setContentView(R.layout.activity_main_music_blurkit);
+            } else {
+                setContentView(R.layout.activity_main_music);
+            }
+
+        } else {
+            setContentView(R.layout.activity_main_music);
         }
+
 
         initAllViews();
         initAllDatum();
@@ -309,7 +314,7 @@ public class MainActivity_Music extends AppCompatActivity implements View.OnClic
                 LogUtil.m("绝对路径" + file.getAbsolutePath());
                 LogUtil.m("相对路径" + file.getPath());
                 if (file.exists()) {
-                        lyricView.setLyricFile(file, "utf-8");
+                    lyricView.setLyricFile(file, "utf-8");
 
                 } else {
                     downloadLyric(list.get(position).getLrcUrl(), file);
