@@ -1,7 +1,7 @@
 package com.li.activity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
@@ -46,15 +46,24 @@ public class SettingActivity extends AppCompatActivity {
         blurkit_sb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    Snackbar.make(buttonView, "开启高斯模糊", Snackbar.LENGTH_LONG).show();
-                } else {
-                    Snackbar.make(buttonView, "关闭高斯模糊", Snackbar.LENGTH_LONG).show();
-                }
                 SharedPreferences share = getSharedPreferences("Data", MODE_PRIVATE);
                 SharedPreferences.Editor edit = share.edit();
-                edit.putBoolean("isChecked", isChecked);
-                edit.commit();
+                if (isChecked) {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+                        Snackbar.make(buttonView, "sorry，android4.4以下不能开启模糊效果", Snackbar.LENGTH_LONG).show();
+                        blurkit_sb.setChecked(false);
+                    } else {
+                        Snackbar.make(buttonView, "开启高斯模糊", Snackbar.LENGTH_LONG).show();
+                        edit.putBoolean("isChecked", isChecked);
+                        edit.commit();
+                    }
+
+                } else {
+                    Snackbar.make(buttonView, "关闭高斯模糊", Snackbar.LENGTH_LONG).show();
+                    edit.putBoolean("isChecked", isChecked);
+                    edit.commit();
+                }
+
             }
         });
     }
@@ -71,10 +80,12 @@ public class SettingActivity extends AppCompatActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.download_path_layout: //下载路径
-                startActivity(new Intent(SettingActivity.this, AppAboutActivity.class));
-
+                Snackbar.make(v, "下载路径默认手机内存Musics\\song", Snackbar.LENGTH_LONG).show();
                 break;
 
+            case R.id.android_about_app:
+                Snackbar.make(v, "点啥点啊，不知道我只是个图标啊", Snackbar.LENGTH_LONG).show();
+                break;
 
             default:
                 break;

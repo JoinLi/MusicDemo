@@ -38,17 +38,16 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:background="?android:attr/selectableItemBackground"
-                       >
+                        android:background="?android:attr/selectableItemBackground">
 
                         <ImageView
                             android:id="@+id/image_3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
                             android:layout_alignParentLeft="true"
                             android:layout_centerInParent="true"
                             android:layout_marginLeft="20dp"
-                            android:src="@drawable/ic_create_write"
+                            android:src="@drawable/img_gs"
                             android:tint="@color/color_read" />
 
                         <TextView
@@ -85,18 +84,17 @@
                         android:id="@+id/download_path_layout"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:onClick="onClick"
                         android:background="?android:attr/selectableItemBackground"
-                      >
+                        android:onClick="onClick">
 
                         <ImageView
                             android:id="@+id/image_4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
                             android:layout_alignParentLeft="true"
                             android:layout_centerInParent="true"
                             android:layout_marginLeft="20dp"
-                            android:src="@drawable/ic_drawer_settings"
+                            android:src="@drawable/img_file"
                             android:tint="@color/color_read" />
 
                         <TextView
@@ -127,20 +125,20 @@
                 app:cardElevation="2dp">
 
                 <RelativeLayout
-                    android:id="@+id/more_btn_about_app"
+                    android:id="@+id/android_about_app"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:background="?android:attr/selectableItemBackground"
-                   >
+                    android:onClick="onClick"
+                    android:background="?android:attr/selectableItemBackground">
 
                     <ImageView
                         android:id="@+id/image_5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_alignParentLeft="true"
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="20dp"
-                        android:src="@drawable/ic_info_outline"
+                        android:src="@drawable/img_android"
                         android:tint="@color/color_read" />
 
                     <TextView
@@ -149,7 +147,7 @@
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="20dp"
                         android:layout_toRightOf="@+id/image_5"
-                        android:text="关于我"
+                        android:text="Excuse me"
                         android:textColor="@color/gary_30"
                         android:textSize="16sp" />
 

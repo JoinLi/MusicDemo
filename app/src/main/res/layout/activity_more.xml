@@ -102,12 +102,12 @@
 
                         <ImageView
                             android:id="@+id/image_3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
                             android:layout_alignParentLeft="true"
                             android:layout_centerInParent="true"
                             android:layout_marginLeft="20dp"
-                            android:src="@drawable/ic_create_write"
+                            android:src="@drawable/img_yj"
                             android:tint="@color/color_read" />
 
                         <TextView
@@ -139,12 +139,12 @@
 
                         <ImageView
                             android:id="@+id/image_4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
                             android:layout_alignParentLeft="true"
                             android:layout_centerInParent="true"
                             android:layout_marginLeft="20dp"
-                            android:src="@drawable/ic_drawer_settings"
+                            android:src="@drawable/img_setting"
                             android:tint="@color/color_read" />
 
                         <TextView
@@ -183,12 +183,12 @@
 
                     <ImageView
                         android:id="@+id/image_5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_alignParentLeft="true"
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="20dp"
-                        android:src="@drawable/ic_info_outline"
+                        android:src="@drawable/img_about"
                         android:tint="@color/color_read" />
 
                     <TextView
