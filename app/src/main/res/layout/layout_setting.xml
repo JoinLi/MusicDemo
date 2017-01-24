@@ -10,6 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:id="@+id/setting_view"
-        android:background="#ECEDDE"
+        android:background="@color/white"
         android:alpha="0.98" />
 </com.li.view.CustomRelativeLayout>

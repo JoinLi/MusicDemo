@@ -1,7 +1,5 @@
 package com.li.activity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -39,6 +37,7 @@ import com.li.adapter.PersonAdapter;
 import com.li.bean.InforBean;
 import com.li.util.ClearEditText;
 import com.li.util.NetUtils;
+import com.li.util.ToastUtil;
 import com.li.util.Util;
 import com.li.widget.floatingmusicmenu.FloatingMusicMenu;
 import com.umeng.analytics.MobclickAgent;
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerArrayAdap
     private String sou = "wy"; //搜索引擎
     private int index; //点击item的位置
     private AlertView mAlertView;
-//    private NetReceiver mReceiver = new NetReceiver();
+    //    private NetReceiver mReceiver = new NetReceiver();
     //FloatingMusicButton
     private FloatingMusicMenu musicMenu;
     private FloatingActionButton playingBtn, modeBtn, detailBtn, nextBtn;
@@ -129,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerArrayAdap
             @Override
             public boolean onItemLongClick(int position) {
                 index = position;
-                new AlertView(null, null, null, new String[]{"标准", "HQ音质", "SQ音质", "无损音质"},
+                new AlertView(null, null, null, new String[]{getResources().getString(R.string.text_message_lc), getResources().getString(R.string.text_message_bz), getResources().getString(R.string.text_message_hq), getResources().getString(R.string.text_message_sq)},
                         new String[]{"取消",},
                         MainActivity.this, null, MainActivity.this).show();
 
@@ -184,8 +183,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerArrayAdap
                         startActivity(intent);
                         break;
                     case -1://无网络
-                       Snackbar.make(getCurrentFocus(), "你在逗我吧，没网听什么歌啊！", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                        Snackbar.make(getCurrentFocus(), "你在逗我吧，没网怎么听歌啊！", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                         break;
                     default:
                         break;
@@ -387,35 +386,35 @@ public class MainActivity extends AppCompatActivity implements RecyclerArrayAdap
     @Override
     public void onItemClick(Object o, int position) {
         System.err.println("位置" + position);
-        DownloadingManager baseActivity=new DownloadingManager(MainActivity.this,list,index);
+        DownloadingManager baseActivity = new DownloadingManager(MainActivity.this, list, index);
 
         switch (position) {
-            case 0: //标准
+            case 0: //流畅
                 if (!list.get(index).getLqUrl().equals("")) {
                     baseActivity.DownloadMusics(list.get(index).getLqUrl(), null);
                 } else {
-                    Toast.makeText(this, "此歌曲没有标准版", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_lc));
                 }
                 break;
-            case 1://HQ高音质
+            case 1://标准
                 if (!list.get(index).getHqUrl().equals("")) {
                     baseActivity.DownloadMusics(list.get(index).getHqUrl(), null);
                 } else {
-                    Toast.makeText(this, "此歌曲没有HQ音质版", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_bz));
                 }
                 break;
-            case 2://SQ音质
+            case 2://HQ音质
                 if (!list.get(index).getSqUrl().equals("")) {
                     baseActivity.DownloadMusics(list.get(index).getSqUrl(), null);
                 } else {
-                    Toast.makeText(this, "此歌曲没有SQ音质版", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_hq));
                 }
                 break;
             case 3://无损音质
                 if (!list.get(index).getFlacUrl().equals("")) {
                     baseActivity.DownloadMusics(list.get(index).getFlacUrl(), ".flac");
                 } else {
-                    Toast.makeText(this, "此歌曲没有无损音质版", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_sq));
                 }
                 break;
 
@@ -423,7 +422,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerArrayAdap
             default:
                 break;
         }
-
 
 
     }
@@ -456,7 +454,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerArrayAdap
 
         return super.onKeyDown(keyCode, event);
     }
-
 
 
 //    public class NetReceiver extends BroadcastReceiver {

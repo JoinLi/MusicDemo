@@ -499,7 +499,7 @@ public class MainActivity_Music extends AppCompatActivity implements View.OnClic
                     downRelativeLayout.dismiss();
                 } else {
 
-                    ToastUtil.showToast(this, "此歌曲没有标准版");
+                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_lc));
                 }
 
 
@@ -511,7 +511,7 @@ public class MainActivity_Music extends AppCompatActivity implements View.OnClic
                     downRelativeLayout.dismiss();
                 } else {
 
-                    ToastUtil.showToast(this, "此歌曲没有HQ音质版");
+                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_bz));
                 }
                 break;
             case R.id.text_hq:
@@ -522,7 +522,7 @@ public class MainActivity_Music extends AppCompatActivity implements View.OnClic
                     downRelativeLayout.dismiss();
                 } else {
 
-                    ToastUtil.showToast(this, "此歌曲没有SQ音质版");
+                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_hq));
                 }
                 break;
             case R.id.text_sq:
@@ -532,7 +532,7 @@ public class MainActivity_Music extends AppCompatActivity implements View.OnClic
                     downRelativeLayout.dismiss();
                 } else {
 
-                    ToastUtil.showToast(this, "此歌曲没有无损音质版");
+                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_sq));
                 }
                 break;
             case R.id.btn_close:
