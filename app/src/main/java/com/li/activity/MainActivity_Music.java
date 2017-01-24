@@ -488,7 +488,6 @@ public class MainActivity_Music extends AppCompatActivity implements View.OnClic
         press_animator.start();
     }
 
-
     public void myOnClick(View view) {
         DownloadingManager baseActivity = new DownloadingManager(MainActivity_Music.this, list, position);
         switch (view.getId()) {
