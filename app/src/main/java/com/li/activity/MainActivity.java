@@ -266,6 +266,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerArrayAdap
                             if (page == 1) {
                                 adapter.clear();
 
+
                             } else {
 
                                 adapter.stopMore();
@@ -277,6 +278,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerArrayAdap
                             try {
                                 if (page == 1) {//暂无数据
                                     adapter.clear();
+
 
                                 }
 
@@ -386,44 +388,56 @@ public class MainActivity extends AppCompatActivity implements RecyclerArrayAdap
     @Override
     public void onItemClick(Object o, int position) {
         System.err.println("位置" + position);
-        DownloadingManager baseActivity = new DownloadingManager(MainActivity.this, list, index);
+        DownloadingManager baseActivity = new DownloadingManager(MainActivity.this,  adapter.getAllData(), index);
+            switch (position) {
+                case 0: //流畅
+                    if (!TextUtils.isEmpty(adapter.getAllData().get(index).getLqUrl())) {
+                        SnackerShow();
+                        baseActivity.DownloadMusics(adapter.getAllData().get(index).getLqUrl(), null);
+                    } else {
+                        SnackerShowMessage(R.string.toast_message_lc);
+                    }
+                    break;
+                case 1://标准
+                    if (!TextUtils.isEmpty(adapter.getAllData().get(index).getHqUrl())) {
+                        SnackerShow();
+                        baseActivity.DownloadMusics( adapter.getAllData().get(index).getHqUrl(), null);
+                    } else {
+                        SnackerShowMessage(R.string.toast_message_bz);
+                    }
+                    break;
+                case 2://HQ音质
+                    if (!TextUtils.isEmpty(adapter.getAllData().get(index).getSqUrl())) {
+                        SnackerShow();
+                        baseActivity.DownloadMusics( adapter.getAllData().get(index).getSqUrl(), null);
+                    } else {
+                        SnackerShowMessage(R.string.toast_message_hq);
+                    }
+                    break;
+                case 3://无损音质
+                    if (!TextUtils.isEmpty(adapter.getAllData().get(index).getFlacUrl())) {
+                        SnackerShow();
+                        baseActivity.DownloadMusics( adapter.getAllData().get(index).getFlacUrl(), ".flac");
+                    } else {
+                      SnackerShowMessage(R.string.toast_message_sq);
 
-        switch (position) {
-            case 0: //流畅
-                if (!list.get(index).getLqUrl().equals("")) {
-                    baseActivity.DownloadMusics(list.get(index).getLqUrl(), null);
-                } else {
-                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_lc));
-                }
-                break;
-            case 1://标准
-                if (!list.get(index).getHqUrl().equals("")) {
-                    baseActivity.DownloadMusics(list.get(index).getHqUrl(), null);
-                } else {
-                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_bz));
-                }
-                break;
-            case 2://HQ音质
-                if (!list.get(index).getSqUrl().equals("")) {
-                    baseActivity.DownloadMusics(list.get(index).getSqUrl(), null);
-                } else {
-                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_hq));
-                }
-                break;
-            case 3://无损音质
-                if (!list.get(index).getFlacUrl().equals("")) {
-                    baseActivity.DownloadMusics(list.get(index).getFlacUrl(), ".flac");
-                } else {
-                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_sq));
-                }
-                break;
+                    }
+                    break;
 
 
-            default:
-                break;
-        }
+                default:
+                    break;
+            }
 
 
+    }
+    private void  SnackerShow(){
+        Snackbar.make( getCurrentFocus(),getResources().getString(R.string.snacker_message), Snackbar.LENGTH_LONG)
+                .show();
+    }
+    private void  SnackerShowMessage(int string){
+        Snackbar.make( getCurrentFocus(),getResources().getString(string), Snackbar.LENGTH_LONG)
+                .show();
     }
 
     /**

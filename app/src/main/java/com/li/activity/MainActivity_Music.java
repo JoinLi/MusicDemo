@@ -250,6 +250,8 @@ public class MainActivity_Music extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
+        //网络流媒体的缓冲监听
+        mediaPlayer.setOnBufferingUpdateListener(MainActivity_Music.this);
         setCurrentState(State.STATE_PREPARE);
         DecimalFormat format = new DecimalFormat("00");
         display_seek.setMax(mediaPlayer.getDuration());
@@ -350,8 +352,6 @@ public class MainActivity_Music extends AppCompatActivity implements View.OnClic
                         mediaPlayer = new MediaPlayer();
                         //准备完成监听
                         mediaPlayer.setOnPreparedListener(MainActivity_Music.this);
-                        //网络流媒体的缓冲监听
-                        mediaPlayer.setOnBufferingUpdateListener(MainActivity_Music.this);
 //                       mediaPlayer.reset();// 把各项参数恢复到初始状态
                         mediaPlayer.setDataSource(list.get(position).getLqUrl());
                         mediaPlayer.prepareAsync();// 进行异步缓冲
