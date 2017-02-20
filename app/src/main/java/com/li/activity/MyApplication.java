@@ -2,9 +2,12 @@ package com.li.activity;
 
 import android.app.Application;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.li.util.Constant;
 import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.cookie.CookieJarImpl;
+import com.zhy.http.okhttp.cookie.store.PersistentCookieStore;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -33,7 +36,7 @@ public class MyApplication extends Application {
 		}
 
 	}
-	public static RequestQueue getApplication() {
+	public static RequestQueue getApplication(StringRequest stringRequest) {
 		return queues;
 	}
 

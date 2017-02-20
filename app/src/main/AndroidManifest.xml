@@ -35,8 +35,10 @@
         <activity android:name="com.li.activity.MainActivity"/>
         <activity android:name="com.li.activity.AppAboutActivity"/>
         <activity android:name="com.li.activity.SettingActivity"/>
+        <activity android:name="com.li.myactivity.IndexActivity"/>
     <activity android:name="com.li.activity.MoreActivity"/>
         <activity android:name="com.li.activity.MainActivity_Music"  android:launchMode="singleTask"/>
+        <activity android:name="com.li.activity.MainActivity_Music1"  android:launchMode="singleTask"/>
         <activity android:name="com.li.activity.MessageActivity"  android:launchMode="singleTask"/>
 
         <meta-data android:value="5868a355f5ade463180006e2" android:name="UMENG_APPKEY"/>

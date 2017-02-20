@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.li.R;
+import com.li.bean.APIService;
 import com.li.bean.InforBean;
 import com.li.util.Constant;
 import com.li.util.LogUtil;
@@ -39,10 +40,23 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.nineoldandroids.view.ViewHelper;
 import com.wonderkiln.blurkit.BlurLayout;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
+
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class MainActivity_Music extends AppCompatActivity implements View.OnClickListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener, LyricView.OnPlayerClickListener {
 
@@ -187,6 +201,8 @@ public class MainActivity_Music extends AppCompatActivity implements View.OnClic
         Glide.with(this).load(list.get(position).getPicUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.qidong).into(relat_img);
 //        Glide.with(this).load(list.get(position).getPicUrl()).bitmapTransform(new BlurTransformation(this, 5)).diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.qidong).crossFade(1000).into(relat_img);
     }
+
+
 
     /**
      * 停止
