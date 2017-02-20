@@ -16,6 +16,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.li.R;
 import com.li.bean.EntryBean;
+import com.li.myactivity.IndexActivity;
 import com.li.util.Constant;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -66,7 +67,7 @@ public class EntryActivity extends Activity {
             @Override
             public void onAnimationEnd(Animator animation) {
 
-                startActivity(new Intent(EntryActivity.this, MainActivity.class));
+                startActivity(new Intent(EntryActivity.this, IndexActivity.class));
                 EntryActivity.this.finish();
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
