@@ -31,8 +31,6 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.li.R;
 import com.li.activity.DownloadingManager;
-import com.li.activity.MainActivity_Music;
-import com.li.activity.MainActivity_Music1;
 import com.li.activity.MoreActivity;
 import com.li.adapter.PersonAdapter;
 import com.li.bean.APIService;
@@ -43,22 +41,16 @@ import com.li.util.NetUtils;
 import com.li.util.ToastUtil;
 import com.li.util.Util;
 import com.umeng.analytics.MobclickAgent;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import me.curzbin.library.BottomDialog;
 import me.curzbin.library.Item;
 import me.curzbin.library.OnItemClickListener;
-import okhttp3.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -67,7 +59,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class IndexActivity extends AppCompatActivity implements RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener, OnDismissListener, com.bigkoo.alertview.OnItemClickListener {
+public class IndexActivity extends AppCompatActivity implements RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
     private EasyRecyclerView recyclerView;
     private PersonAdapter adapter;
     private List<InforBean> list = new ArrayList<InforBean>();
@@ -140,25 +132,14 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
                                 .show();
                     }
                 });
-
-        adapter.setOnItemLongClickListener(new RecyclerArrayAdapter.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(int position) {
-                index = position;
-                new AlertView(null, null, null, new String[]{getResources().getString(R.string.text_message_lc), getResources().getString(R.string.text_message_bz), getResources().getString(R.string.text_message_hq), getResources().getString(R.string.text_message_sq)},
-                        new String[]{"取消",},
-                        IndexActivity.this, null, IndexActivity.this).show();
-
-                return true;
-            }
-        });
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
 
                 final Intent intent = new Intent(IndexActivity.this, MainActivity_Music1.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("position", position);                                       //一定要获得 adapter数据 List<InforBean>类型
+                bundle.putInt("position", position);
+                bundle.putString("sou", sou);    //一定要获得 adapter数据 List<InforBean>类型
                 bundle.putParcelableArrayList("medias", (ArrayList<? extends Parcelable>) adapter.getAllData());
                 intent.putExtras(bundle);
 
@@ -231,7 +212,7 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         APIService service = retrofit.create(APIService.class);
-        Observable<String> observable = service.getCtring("qq",context, page);
+        Observable<String> observable = service.getCtring(sou,context, page);
         observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<String>() {
                     @Override
@@ -263,7 +244,7 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
                         Elements elements = doc.select("div.line1");
                         for (Element element : elements) {
                             InforBean bean = new InforBean();
-                            bean.setSongName(element.select("a").text().replace("播放", "").toString().trim());
+                            bean.setSongName(element.select("a").text().replace("播放", "").replace("去天天动听","").replace("去网易","").toString().trim());
                             bean.setType(element.select("a").attr("href"));
 //                                    bean.setTitle(element.select("b").text());
 //                                    element.select("b").text();
@@ -360,7 +341,7 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
             //kkkfdk
             sou = "qq";
         } else if (title.equals("虾米")) {
-            sou = "xm";
+            sou = "ttdt";
         } else if (title.equals("百度")) {
             sou = "bd";
         } else if (title.equals("酷狗")) {
@@ -387,62 +368,13 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
     }
 
     @Override
-    public void onDismiss(Object o) {
-
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
-//        unregisterReceiver(mReceiver);
         SharedPreferences share = IndexActivity.this.getSharedPreferences(
                 "Data", IndexActivity.this.MODE_PRIVATE);
         SharedPreferences.Editor editor = share.edit();
         editor.clear();
         editor.commit();
-    }
-
-    @Override
-    public void onItemClick(Object o, int position) {
-        System.err.println("位置" + position);
-        DownloadingManager baseActivity = new DownloadingManager(IndexActivity.this, list, index);
-
-        switch (position) {
-            case 0: //流畅
-                if (!list.get(index).getLqUrl().equals("")) {
-                    baseActivity.DownloadMusics(list.get(index).getLqUrl(), null);
-                } else {
-                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_lc));
-                }
-                break;
-            case 1://标准
-                if (!list.get(index).getHqUrl().equals("")) {
-                    baseActivity.DownloadMusics(list.get(index).getHqUrl(), null);
-                } else {
-                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_bz));
-                }
-                break;
-            case 2://HQ音质
-                if (!list.get(index).getSqUrl().equals("")) {
-                    baseActivity.DownloadMusics(list.get(index).getSqUrl(), null);
-                } else {
-                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_hq));
-                }
-                break;
-            case 3://无损音质
-                if (!list.get(index).getFlacUrl().equals("")) {
-                    baseActivity.DownloadMusics(list.get(index).getFlacUrl(), ".flac");
-                } else {
-                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_sq));
-                }
-                break;
-
-
-            default:
-                break;
-        }
-
-
     }
 
     /**
