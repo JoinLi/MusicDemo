@@ -505,57 +505,57 @@ public class MainActivity_Music extends AppCompatActivity implements View.OnClic
     }
 
     public void myOnClick(View view) {
-        DownloadingManager baseActivity = new DownloadingManager(MainActivity_Music.this, list, position);
-        switch (view.getId()) {
-            case R.id.text_lc:
-                if (!list.get(position).getLqUrl().equals("")) {
-                    baseActivity.DownloadMusics(list.get(position).getLqUrl(), null);
-                    ToastUtil.showToast(this, "开始下载");
-                    downRelativeLayout.dismiss();
-                } else {
-
-                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_lc));
-                }
-
-
-                break;
-            case R.id.text_bz:
-                if (!list.get(position).getHqUrl().equals("")) {
-                    baseActivity.DownloadMusics(list.get(position).getHqUrl(), null);
-                    ToastUtil.showToast(this, "开始下载");
-                    downRelativeLayout.dismiss();
-                } else {
-
-                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_bz));
-                }
-                break;
-            case R.id.text_hq:
-
-                if (!list.get(position).getSqUrl().equals("")) {
-                    baseActivity.DownloadMusics(list.get(position).getSqUrl(), null);
-                    ToastUtil.showToast(this, "开始下载");
-                    downRelativeLayout.dismiss();
-                } else {
-
-                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_hq));
-                }
-                break;
-            case R.id.text_sq:
-                if (!list.get(position).getFlacUrl().equals("")) {
-                    baseActivity.DownloadMusics(list.get(position).getFlacUrl(), ".flac");
-                    ToastUtil.showToast(this, "开始下载");
-                    downRelativeLayout.dismiss();
-                } else {
-
-                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_sq));
-                }
-                break;
-            case R.id.btn_close:
-                downRelativeLayout.dismiss();
-                break;
-            default:
-                break;
-        }
+//        DownloadingManager baseActivity = new DownloadingManager(MainActivity_Music.this, list, position);
+//        switch (view.getId()) {
+//            case R.id.text_lc:
+//                if (!list.get(position).getLqUrl().equals("")) {
+//                    baseActivity.DownloadMusics(list.get(position).getLqUrl(), null);
+//                    ToastUtil.showToast(this, "开始下载");
+//                    downRelativeLayout.dismiss();
+//                } else {
+//
+//                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_lc));
+//                }
+//
+//
+//                break;
+//            case R.id.text_bz:
+//                if (!list.get(position).getHqUrl().equals("")) {
+//                    baseActivity.DownloadMusics(list.get(position).getHqUrl(), null);
+//                    ToastUtil.showToast(this, "开始下载");
+//                    downRelativeLayout.dismiss();
+//                } else {
+//
+//                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_bz));
+//                }
+//                break;
+//            case R.id.text_hq:
+//
+//                if (!list.get(position).getSqUrl().equals("")) {
+//                    baseActivity.DownloadMusics(list.get(position).getSqUrl(), null);
+//                    ToastUtil.showToast(this, "开始下载");
+//                    downRelativeLayout.dismiss();
+//                } else {
+//
+//                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_hq));
+//                }
+//                break;
+//            case R.id.text_sq:
+//                if (!list.get(position).getFlacUrl().equals("")) {
+//                    baseActivity.DownloadMusics(list.get(position).getFlacUrl(), ".flac");
+//                    ToastUtil.showToast(this, "开始下载");
+//                    downRelativeLayout.dismiss();
+//                } else {
+//
+//                    ToastUtil.showToast(this, getResources().getString(R.string.toast_message_sq));
+//                }
+//                break;
+//            case R.id.btn_close:
+//                downRelativeLayout.dismiss();
+//                break;
+//            default:
+//                break;
+//        }
 
     }
 

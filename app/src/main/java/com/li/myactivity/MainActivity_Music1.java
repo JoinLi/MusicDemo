@@ -245,13 +245,6 @@ public class MainActivity_Music1 extends AppCompatActivity implements View.OnCli
 
                                 }
                             }
-                            String suffixes="avi|mpeg|3gp|mp3|mp4|wav|jpeg|gif|jpg|png|apk|exe|pdf|rar|zip|docx|doc";
-                            Pattern pat= Pattern.compile("[\\w]+[\\.]("+suffixes+")");//正则判断
-                            Matcher mc=pat.matcher(songList.get(1).getSongTypeUrl());//条件匹配
-                            while(mc.find()){
-                                String substring = mc.group();//截取文件名后缀名
-                                Log.e("substring:", substring);
-                            }
                             int start = string.indexOf("歌词部分");
                             lrc = string.substring(start + 8).replace("<hr />", "");
                             LogUtil.m(lrc.toString().trim());
@@ -447,7 +440,7 @@ public class MainActivity_Music1 extends AppCompatActivity implements View.OnCli
                         //网络流媒体的缓冲监听
                         mediaPlayer.setOnBufferingUpdateListener(MainActivity_Music1.this);
 //                       mediaPlayer.reset();// 把各项参数恢复到初始状态
-                        if (sou.equals("ttdt")) {
+                        if (sou.equals("ttdt")||sou.equals("qq")) {
                             mediaPlayer.setDataSource(songList.get(1).getSongTypeUrl());
                         } else {
                             mediaPlayer.setDataSource(songList.get(0).getSongTypeUrl());
@@ -594,20 +587,26 @@ public class MainActivity_Music1 extends AppCompatActivity implements View.OnCli
                 if (downRelativeLayout == null) {
                     downRelativeLayout = (CustomRelativeLayout) main_download_layout.inflate();
                 }
-                listView = (ListView) downRelativeLayout.findViewById(R.id.download_list);
+                if (sou.equals("wy")){
+                    SongBean bean=new SongBean();
+                    bean.setSongTypeUrl(songList.get(0).getSongTypeUrl());
+                    bean.setSongTypeName(songList.get(0).getSongTypeName());
+                    songList.clear();
+                    songList.add(bean);
+                }
+                listView = (ListView)downRelativeLayout.findViewById(R.id.download_list);
                 DownloadingAdapter adapter = new DownloadingAdapter(songList, MainActivity_Music1.this);
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int p, long id) {
-                        DownloadingManager baseActivity = new DownloadingManager(MainActivity_Music1.this, list, position);
-                        baseActivity.DownloadMusics(songList.get(p).getSongTypeUrl(), null);
+                        DownloadingManager baseActivity = new DownloadingManager(MainActivity_Music1.this, list.get(position).getSongName(), position);
+                        baseActivity.DownloadMusics(songList.get(p).getSongTypeUrl());
                         ToastUtil.showToast(MainActivity_Music1.this, "开始下载");
                         downRelativeLayout.dismiss();
                     }
                 });
                 downRelativeLayout.show();
-
                 break;
 
             default:

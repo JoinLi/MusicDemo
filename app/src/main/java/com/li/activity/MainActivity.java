@@ -388,46 +388,46 @@ public class MainActivity extends AppCompatActivity implements RecyclerArrayAdap
     @Override
     public void onItemClick(Object o, int position) {
         System.err.println("位置" + position);
-        DownloadingManager baseActivity = new DownloadingManager(MainActivity.this,  adapter.getAllData(), index);
-            switch (position) {
-                case 0: //流畅
-                    if (!TextUtils.isEmpty(adapter.getAllData().get(index).getLqUrl())) {
-                        SnackerShow();
-                        baseActivity.DownloadMusics(adapter.getAllData().get(index).getLqUrl(), null);
-                    } else {
-                        SnackerShowMessage(R.string.toast_message_lc);
-                    }
-                    break;
-                case 1://标准
-                    if (!TextUtils.isEmpty(adapter.getAllData().get(index).getHqUrl())) {
-                        SnackerShow();
-                        baseActivity.DownloadMusics( adapter.getAllData().get(index).getHqUrl(), null);
-                    } else {
-                        SnackerShowMessage(R.string.toast_message_bz);
-                    }
-                    break;
-                case 2://HQ音质
-                    if (!TextUtils.isEmpty(adapter.getAllData().get(index).getSqUrl())) {
-                        SnackerShow();
-                        baseActivity.DownloadMusics( adapter.getAllData().get(index).getSqUrl(), null);
-                    } else {
-                        SnackerShowMessage(R.string.toast_message_hq);
-                    }
-                    break;
-                case 3://无损音质
-                    if (!TextUtils.isEmpty(adapter.getAllData().get(index).getFlacUrl())) {
-                        SnackerShow();
-                        baseActivity.DownloadMusics( adapter.getAllData().get(index).getFlacUrl(), ".flac");
-                    } else {
-                      SnackerShowMessage(R.string.toast_message_sq);
-
-                    }
-                    break;
-
-
-                default:
-                    break;
-            }
+//        DownloadingManager baseActivity = new DownloadingManager(MainActivity.this,  adapter.getAllData(), index);
+//            switch (position) {
+//                case 0: //流畅
+//                    if (!TextUtils.isEmpty(adapter.getAllData().get(index).getLqUrl())) {
+//                        SnackerShow();
+//                        baseActivity.DownloadMusics(adapter.getAllData().get(index).getLqUrl(), null);
+//                    } else {
+//                        SnackerShowMessage(R.string.toast_message_lc);
+//                    }
+//                    break;
+//                case 1://标准
+//                    if (!TextUtils.isEmpty(adapter.getAllData().get(index).getHqUrl())) {
+//                        SnackerShow();
+//                        baseActivity.DownloadMusics( adapter.getAllData().get(index).getHqUrl(), null);
+//                    } else {
+//                        SnackerShowMessage(R.string.toast_message_bz);
+//                    }
+//                    break;
+//                case 2://HQ音质
+//                    if (!TextUtils.isEmpty(adapter.getAllData().get(index).getSqUrl())) {
+//                        SnackerShow();
+//                        baseActivity.DownloadMusics( adapter.getAllData().get(index).getSqUrl(), null);
+//                    } else {
+//                        SnackerShowMessage(R.string.toast_message_hq);
+//                    }
+//                    break;
+//                case 3://无损音质
+//                    if (!TextUtils.isEmpty(adapter.getAllData().get(index).getFlacUrl())) {
+//                        SnackerShow();
+//                        baseActivity.DownloadMusics( adapter.getAllData().get(index).getFlacUrl(), ".flac");
+//                    } else {
+//                      SnackerShowMessage(R.string.toast_message_sq);
+//
+//                    }
+//                    break;
+//
+//
+//                default:
+//                    break;
+//            }
 
 
     }

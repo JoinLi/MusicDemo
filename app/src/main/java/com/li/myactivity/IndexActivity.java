@@ -189,7 +189,6 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
         });
         recyclerView.setRefreshListener(this);  //下拉刷新
         adapter.addAll(list);
-        initData();
     }
 
 
@@ -350,7 +349,7 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
         } else if (title.equals("酷狗")) {
             sou = "kg";
         } else if (title.equals("酷我")) {
-            sou = "kw";
+            sou = "kuwo";
         } else if (title.equals("5sing")) {
             sou = "fs";
         }

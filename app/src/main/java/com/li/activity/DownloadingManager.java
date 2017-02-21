@@ -5,40 +5,38 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
-import com.li.bean.InforBean;
-import com.li.util.Constant;
+import android.util.Log;
+
 import com.li.util.LogUtil;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
  * Created by hcc on 16/5/15 16:33
  * 986483793@qq.com
  */
-public class DownloadingManager extends AppCompatActivity  {
-    private List<InforBean> list;
+public class DownloadingManager extends AppCompatActivity {
     private int index;
+    private String name;
     private DownloadManager manager;//下载管理器
     private long downloadId;
     private Context mContext;
 
-    public DownloadingManager(Context mContext, List<InforBean> list, int index) {
-        this.list = list;
+    public DownloadingManager(Context mContext, String name, int index) {
+        this.name = name;
         this.index = index;
-        this.mContext=mContext;
+        this.mContext = mContext;
         manager = (DownloadManager) mContext.getSystemService(DOWNLOAD_SERVICE);
 
 
     }
 
-   public  void DownloadMusics(String path, String flac) {
+    public void DownloadMusics(String path) {
         DownloadManager.Query query = new DownloadManager.Query();
-        query.setFilterById(list.get(index).getSongId());
+        query.setFilterById(index);
         query.setFilterByStatus(DownloadManager.STATUS_RUNNING);//正在下载
         Cursor c = manager.query(query);
         if (c.moveToNext()) {
@@ -51,24 +49,26 @@ public class DownloadingManager extends AppCompatActivity  {
             //显示在下载界面，即下载后的文件在系统下载管理里显示
             down.setVisibleInDownloadsUi(true);
             //设置下载标题
-            down.setTitle(list.get(index).getSongName());
+            down.setTitle(name);
             //显示Notification
             down.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
 
             File folder = new File("/Musics/song/");
-            LogUtil.m("绝对路径"+folder.getAbsolutePath());
-            LogUtil.m("相对路径"+folder.getPath());
+            LogUtil.m("绝对路径" + folder.getAbsolutePath());
+            LogUtil.m("相对路径" + folder.getPath());
             if (!folder.exists() && !folder.isDirectory()) {
                 folder.mkdirs();
             }
-            //设置下载后文件存放的位置，在SDCard/Android/data/你的应用的包名/files/目录下面
-            if (flac != null) {
-                down.setDestinationInExternalPublicDir("/Musics/song/",list.get(index).getSongName() +flac);
-            } else {
-                down.setDestinationInExternalPublicDir("/Musics/song/", list.get(index).getSongName() + ".mp3");
+            //获取url后缀名
+            String suffixes = "avi|mpeg|3gp|mp3|mp4|flac|wav|jpeg|gif|jpg|png|apk|exe|pdf|rar|zip|docx|doc";
+            Pattern pat = Pattern.compile("[\\.](" + suffixes + ")");//正则判断
+            Matcher mc = pat.matcher(path);//条件匹配
+            String suffixName = null;
+            while (mc.find()) {
+                suffixName = mc.group();//截取文件名后缀名
+                Log.e("substring:", suffixName);
             }
-
-            flac = null;//falc制空
+            down.setDestinationInExternalPublicDir("/Musics/song/", name + suffixName);
             //允许被扫描到
             down.allowScanningByMediaScanner();
             //将下载请求放入队列,返回值为downloadId
