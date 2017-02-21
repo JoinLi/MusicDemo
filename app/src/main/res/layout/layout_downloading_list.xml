@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.li.view.CustomRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FFF"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <ListView
+            android:id="@+id/download_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#24969696" />
+
+        <TextView
+            android:id="@+id/btn_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_selector"
+            android:gravity="center"
+            android:onClick="myOnClick"
+            android:text="关闭"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</com.li.view.CustomRelativeLayout>

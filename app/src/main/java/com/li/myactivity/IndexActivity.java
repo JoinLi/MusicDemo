@@ -41,10 +41,12 @@ import com.li.util.NetUtils;
 import com.li.util.ToastUtil;
 import com.li.util.Util;
 import com.umeng.analytics.MobclickAgent;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -212,7 +214,7 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         APIService service = retrofit.create(APIService.class);
-        Observable<String> observable = service.getCtring(sou,context, page);
+        Observable<String> observable = service.getCtring(sou, context, page);
         observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<String>() {
                     @Override
@@ -244,7 +246,7 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
                         Elements elements = doc.select("div.line1");
                         for (Element element : elements) {
                             InforBean bean = new InforBean();
-                            bean.setSongName(element.select("a").text().replace("播放", "").replace("去天天动听","").replace("去网易","").toString().trim());
+                            bean.setSongName(element.text().replaceAll("(?:播放|去天天动听|去网易|1、|2、|3、|4、|5、|6、|7、|8、|9、|10、|20、|1)", "").toString().trim());
                             bean.setType(element.select("a").attr("href"));
 //                                    bean.setTitle(element.select("b").text());
 //                                    element.select("b").text();
@@ -258,7 +260,8 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
                     }
                 });
     }
-//private void initData() {
+
+    //private void initData() {
 //
 //    try {
 //        OkHttpUtils

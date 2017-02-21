@@ -184,7 +184,7 @@
             android:id="@+id/main_download_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout="@layout/layout_downloading" />
+            android:layout="@layout/layout_downloading_list" />
 
     <!--</com.wonderkiln.blurkit.BlurLayout>-->
 </RelativeLayout>

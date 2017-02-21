@@ -67,6 +67,7 @@ public class DownloadingManager extends AppCompatActivity  {
             } else {
                 down.setDestinationInExternalPublicDir("/Musics/song/", list.get(index).getSongName() + ".mp3");
             }
+
             flac = null;//falc制空
             //允许被扫描到
             down.allowScanningByMediaScanner();
