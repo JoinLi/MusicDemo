@@ -17,7 +17,6 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.gson.Gson;
-import com.li.bean.APIService;
 import com.li.bean.UpdateBean;
 import com.li.util.Constant;
 import com.li.util.LogUtil;
@@ -73,15 +72,15 @@ public class Updae_MainActivity extends AppCompatActivity {
                             m_newVerName = updateBean.getMydata().get(0).getVersionName();
                             m_newVerCode = updateBean.getMydata().get(0).getVersionCode();
                             m_appPath = updateBean.getMydata().get(0).getDizhi();
-                            m_update=updateBean.getMydata().get(0).getBbmingcheng();
-                            LogUtil.m("版本名称"+m_newVerName+ "版本号" + m_newVerCode+"下载地址"+m_appPath);
+                            m_update = updateBean.getMydata().get(0).getBbmingcheng();
+//                            LogUtil.m("版本名称" + m_newVerName + "版本号" + m_newVerCode + "下载地址" + m_appPath);
                             int vercode = getVerCode(getApplicationContext()); //
                             if (m_newVerCode > vercode) {
-                                LogUtil.m("更新新版本+m_newVerCode" );
+                                LogUtil.m("更新新版本"+m_newVerCode);
                                 doNewVersionUpdate(); // 更新新版本
-                            }else{
-                                LogUtil.m("已是最新版本" );
-                                ToastUtil.showToast(Updae_MainActivity.this,"已是最新版本");
+                            } else {
+                                LogUtil.m("已是最新版本");
+                                ToastUtil.showToast(Updae_MainActivity.this, "已是最新版本");
                             }
 
                         } catch (Exception e) {
@@ -100,8 +99,6 @@ public class Updae_MainActivity extends AppCompatActivity {
      * 提示更新新版本
      */
     private void doNewVersionUpdate() {
-        String verName = getVerName(getApplicationContext());
-//        final String str = "当前版本：" + verName + " ,发现新版本：" + m_newVerName + " ,是否更新？";
         new MaterialDialog.Builder(this)
                 .title("客户端更新")
                 .content(m_update)
@@ -148,8 +145,7 @@ public class Updae_MainActivity extends AppCompatActivity {
                     public void onShow(DialogInterface dialogInterface) {
                         apkDownload(apkUrl);
                     }
-                }).show()
-                ;
+                }).show();
     }
 
     /**
