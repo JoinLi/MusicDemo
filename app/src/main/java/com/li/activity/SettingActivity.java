@@ -21,7 +21,7 @@ import com.li.R;
  */
 public class SettingActivity extends AppCompatActivity {
 
-    private SwitchButton blurkit_sb;
+    private SwitchButton blurkit_sb, update_sb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +41,12 @@ public class SettingActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
 
         blurkit_sb = (SwitchButton) findViewById(R.id.blurkit_sb);
+        update_sb = (SwitchButton) findViewById(R.id.update_sb);
         SharedPreferences share = getSharedPreferences("Data", MODE_PRIVATE);
         blurkit_sb.setChecked(share.getBoolean("isChecked", false));
+
+        SharedPreferences share_update = getSharedPreferences("Update", MODE_PRIVATE);
+        update_sb.setChecked(share_update.getBoolean("isUpdate", true));
         blurkit_sb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -66,6 +70,28 @@ public class SettingActivity extends AppCompatActivity {
 
             }
         });
+
+        update_sb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Snackbar.make(buttonView, "开启在线更新", Snackbar.LENGTH_LONG).show();
+
+                } else {
+                    Snackbar.make(buttonView, "关闭在线更新", Snackbar.LENGTH_LONG).show();
+
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences share_update = getSharedPreferences("Update", MODE_PRIVATE);
+        SharedPreferences.Editor edit = share_update.edit();
+        edit.putBoolean("isUpdate", update_sb.isChecked());
+        edit.commit();
     }
 
     @Override

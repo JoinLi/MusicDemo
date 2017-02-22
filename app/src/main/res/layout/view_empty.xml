@@ -6,4 +6,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="18sp"
-        android:text="暂无数据"/>
+        android:drawableTop="@mipmap/ic_err_context"
+         android:drawablePadding="10dp"
+        android:text="没有找到内容"/>

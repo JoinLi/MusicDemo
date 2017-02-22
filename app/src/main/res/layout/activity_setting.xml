@@ -147,10 +147,18 @@
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="20dp"
                         android:layout_toRightOf="@+id/image_5"
-                        android:text="Excuse me"
+                        android:text="在线更新"
                         android:textColor="@color/gary_30"
                         android:textSize="16sp" />
-
+                    <com.kyleduo.switchbutton.SwitchButton
+                        android:id="@+id/update_sb"
+                        style="@style/SwitchButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="20dp"
+                        app:kswTintColor="@color/colorPrimary" />
 
                 </RelativeLayout>
 

@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,15 +24,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bigkoo.alertview.AlertView;
-import com.bigkoo.alertview.OnDismissListener;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.li.R;
-import com.li.activity.DownloadingManager;
 import com.li.activity.MoreActivity;
+import com.li.activity.Updae_MainActivity;
 import com.li.adapter.PersonAdapter;
 import com.li.bean.APIService;
 import com.li.bean.InforBean;
@@ -61,7 +59,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class IndexActivity extends AppCompatActivity implements RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class IndexActivity extends Updae_MainActivity implements RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
     private EasyRecyclerView recyclerView;
     private PersonAdapter adapter;
     private List<InforBean> list = new ArrayList<InforBean>();
@@ -69,8 +67,6 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
     private EditText mClearEditText;
     private String context = "薛之谦";
     private String sou = "wy"; //搜索引擎
-    private int index; //点击item的位置
-    private AlertView mAlertView;
     private ImageView ic_search;
 
     @Override
@@ -78,6 +74,11 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
         initView();
+        SharedPreferences share_update = getSharedPreferences("Update", MODE_PRIVATE);
+        if (share_update.getBoolean("isUpdate", false)){
+            CheckNewestVersion();
+        }
+
     }
 
     private void initView() {
@@ -109,8 +110,13 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
             @Override
             public void onClick(View v) {
                 context = mClearEditText.getText().toString();
-                onRefresh();
-                LogUtil.m("内容" + context);
+                if (TextUtils.isEmpty(context)) {
+                    ToastUtil.showToast(IndexActivity.this, "搜索内容不能为空");
+                } else {
+                    onRefresh();
+                    LogUtil.m("内容" + context);
+                }
+
 
             }
         });
@@ -207,6 +213,9 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
     }
 
     private void initData() {
+        if (page == 1) {
+            recyclerView.showProgress();
+        }
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constant.Song_QQ_Path)
                 .addConverterFactory(ScalarsConverterFactory.create())
@@ -258,6 +267,9 @@ public class IndexActivity extends AppCompatActivity implements RecyclerArrayAda
                         adapter.addAll(list);
                     }
                 });
+        if (page == 1) {
+            recyclerView.cancelLongPress();
+        }
     }
 
     //private void initData() {
