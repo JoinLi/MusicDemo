@@ -36,7 +36,7 @@ public class PersonViewHolder extends BaseViewHolder<InforBean> {
         mTv_sign.setText(person.getArtist());
         Glide.with(getContext())
                 .load(person.getPicUrl())
-                .placeholder(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.ic_err_context)
                 .bitmapTransform(new CropCircleTransformation(getContext()))
                 .into(mImg_face);
     }
