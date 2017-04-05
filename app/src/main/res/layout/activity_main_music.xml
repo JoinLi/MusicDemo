@@ -107,7 +107,7 @@
 
                 <TextView
                     android:id="@android:id/text1"
-                    android:layout_width="48dp"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="6dp"
@@ -133,7 +133,7 @@
 
                 <TextView
                     android:id="@android:id/text2"
-                    android:layout_width="48dp"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="6dp"

@@ -14,4 +14,7 @@ public class Constant {
     //2.20 更新api
     public static final String  Song_QQ_Path ="http://3g.gljlw.com/music/";
     public static final String  Song_Update ="https://raw.githubusercontent.com/JoinLi/index/master/music";
+
+    //2.24 增加新api  post
+    public static final String  Song_New_Path ="http://1024me.butterfly.mopaasapp.com/show.php?t=netmusic";
 }

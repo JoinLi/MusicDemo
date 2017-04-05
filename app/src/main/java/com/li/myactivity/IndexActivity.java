@@ -11,7 +11,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -23,7 +22,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bigkoo.alertview.AlertView;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
@@ -39,6 +37,8 @@ import com.li.util.NetUtils;
 import com.li.util.ToastUtil;
 import com.li.util.Util;
 import com.umeng.analytics.MobclickAgent;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -51,6 +51,7 @@ import java.util.List;
 import me.curzbin.library.BottomDialog;
 import me.curzbin.library.Item;
 import me.curzbin.library.OnItemClickListener;
+import okhttp3.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -75,7 +76,7 @@ public class IndexActivity extends Updae_MainActivity implements RecyclerArrayAd
         setContentView(R.layout.activity_index);
         initView();
         SharedPreferences share_update = getSharedPreferences("Update", MODE_PRIVATE);
-        if (share_update.getBoolean("isUpdate", false)){
+        if (share_update.getBoolean("isUpdate", false)) {
             CheckNewestVersion();
         }
 
@@ -195,6 +196,7 @@ public class IndexActivity extends Updae_MainActivity implements RecyclerArrayAd
         });
         recyclerView.setRefreshListener(this);  //下拉刷新
         adapter.addAll(list);
+
     }
 
 
@@ -209,6 +211,7 @@ public class IndexActivity extends Updae_MainActivity implements RecyclerArrayAd
     public void onRefresh() {
         page = 1;
         initData();
+//        initNewData();
 
     }
 
@@ -272,54 +275,80 @@ public class IndexActivity extends Updae_MainActivity implements RecyclerArrayAd
         }
     }
 
-    //private void initData() {
+//    private void initNewData() {
 //
-//    try {
-//        OkHttpUtils
-//                .get()
-//                .url(Constant.Song_QQ_Path)
-//                .build()
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//                        if (page == 1) {
-//                            adapter.clear();
-//
-//                        } else {
-//
-//                            adapter.stopMore();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String string, int id) {
-//                        try {
-//                            if (page == 1) {//暂无数据
+//        try {
+//            OkHttpUtils
+//                    .post()
+//                    .url(Constant.Song_New_Path)
+//                    .addParams("id", "张杰")
+//                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+//                    .addHeader("User-Agent", "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; Shuame; InfoPath.2)")
+//                    .build()
+//                    .execute(new StringCallback() {
+//                        @Override
+//                        public void onError(Call call, Exception e, int id) {
+//                            if (page == 1) {
 //                                adapter.clear();
+//
+//                            } else {
+//
+//                                adapter.stopMore();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onResponse(String string, int id) {
+//                            try {
+//                                if (page == 1) {//暂无数据
+//                                    adapter.clear();
+//                                }
+//                                List<String> titlelist=new ArrayList<String>();
+//                                List<String> musiclist=new ArrayList<String>();
+//                                List<String> songlist=new ArrayList<String>();
+//                                System.err.println("" + string);
+//                                Document doc = Jsoup.parse(string);
+//                                Elements elements = doc.getElementsByTag("table");
+//                                for (Element element : elements) {
+//                                    Elements tds = element.select("tr");
+//                                    for (Element td : tds) {
+//                                        Elements hrefs = td.getElementsByClass("am-kai");
+//                                        titlelist.add(hrefs.text());
+//                                        LogUtil.m(hrefs.text());
+//                                        Elements hrefss = td.select("td");
+//                                        for (Element href : hrefss) {
+//                                            String title = href.select("a").text();
+//                                            musiclist.add(title);
+//                                            String url = href.select("a").attr("href");
+//                                            songlist.add(url);
+//
+//                                            LogUtil.m(title+url);
+//
+//                                        }
+//                                    }
+//
+//                                }
+//                                adapter.addAll(list);
+//                            } catch (Exception e) {
+//                                adapter.stopMore();
+//                                e.printStackTrace();
 //
 //                            }
 //
-//                            System.err.println("" + string);
-//                            adapter.addAll(list);
-//                        } catch (Exception e) {
-//                            adapter.stopMore();
-//                            e.printStackTrace();
 //
 //                        }
 //
+//                    });
 //
-//                    }
+//        } catch (Exception e) {
+//            adapter.stopMore();
+//            e.printStackTrace();
 //
-//                });
+//        }
 //
-//    } catch (Exception e) {
-//        adapter.stopMore();
-//        e.printStackTrace();
 //
 //    }
-//
-//
-//}
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

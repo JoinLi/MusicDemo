@@ -99,6 +99,7 @@ public class EntryActivity extends Activity {
                             mFormText.setText(entryBean.getText());
                         } catch (Exception e) {
                             System.err.println("出错了");
+                            Glide.with(EntryActivity.this).load(R.drawable.qidong).into(mLuanchImage);
                             e.printStackTrace();
 
                         }
